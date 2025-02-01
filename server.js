@@ -37,7 +37,7 @@ app.use(express.static('public'));
 // Load users from database
 async function loadUsers() {
     try {
-        const [rows] = await pool.query('SELECT username, salted_password FROM users');
+        const [rows] = await pool.query('SELECT Username, Password FROM client');
         return rows;
     } catch (err) {
         throw new Error('Error loading users from database: ' + err.message);
@@ -47,7 +47,7 @@ async function loadUsers() {
 // Check if username exists
 async function usernameExists(username) {
     try {
-        const [rows] = await pool.query('SELECT 1 FROM users WHERE username = ?', [username]);
+        const [rows] = await pool.query('SELECT 1 FROM client WHERE Username = ?', [username]);
         return rows.length > 0;
     } catch (err) {
         throw new Error('Error checking username existence: ' + err.message);
@@ -58,10 +58,10 @@ async function usernameExists(username) {
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
     try {
-        const [rows] = await pool.query('SELECT salted_password FROM users WHERE username = ?', [username]);
+        const [rows] = await pool.query('SELECT Password FROM client WHERE Username = ?', [username]);
         const user = rows[0];
         if (user) {
-            const match = await bcrypt.compare(password, user.salted_password);
+            const match = await bcrypt.compare(password, user.Password);
             if (match) return res.json({ success: true });
         }
         res.status(401).json({ success: false, message: 'Invalid credentials' });
@@ -82,7 +82,7 @@ app.post('/signup', async (req, res) => {
         if (exists) return res.status(400).json({ success: false, message: 'Username already taken' });
 
         const hashedPassword = await bcrypt.hash(password, saltRounds);
-        await pool.query('INSERT INTO users (username, salted_password) VALUES (?, ?)', [username, hashedPassword]);
+        await pool.query('INSERT INTO client (Username, Password) VALUES (?, ?)', [username, hashedPassword]);
         res.json({ success: true });
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });
