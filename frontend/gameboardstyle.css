@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    /* background-color: red; */
+}
+.enemySection {
+    display: flex;
+    justify-content: space-around; /* Elemanlar arasında eşit boşluk bırakır */
+    align-items: center; /* Elemanları dikeyde ortalar */
+    width: 100%; /* Kapsayıcının genişliğini tam olarak kullan */
+    max-width: 1920px; /* Maksimum genişlik belirle (isteğe bağlı) */
+    margin: 0 auto; /* Ortala (isteğe bağlı) */
+    background-color: aqua; /* Arka plan rengi (debug için) */
+}
+.enemyDeckContainer {
+    flex: 1; /* 1 birim genişler */
+    background-color: brown;
+    height: 253px;
+    display: flex;
+    justify-content: center;
+}
+
+.enemyDeck {
+    
+}
+.enemyHandContainer {
+    flex: 2; /* 2 birim genişler */
+    background-color: blue;
+    height: 253px;
+    display: flex;
+    justify-content:space-evenly;
+    gap: 20px;
+
+}
+
+.enemyDiscardContainer {
+    flex: 1; /* 1 birim genişler */
+    background-color: beige;
+    height: 253px;
+}
