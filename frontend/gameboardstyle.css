@@ -1,40 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .container {
     display: flex;
-    flex-direction: row;
+    flex-direction:column;
     /* background-color: red; */
+    gap: 15px;
 }
 .enemySection {
     display: flex;
     justify-content: space-around; /* Elemanlar arasında eşit boşluk bırakır */
-    align-items: center; /* Elemanları dikeyde ortalar */
     width: 100%; /* Kapsayıcının genişliğini tam olarak kullan */
     max-width: 1920px; /* Maksimum genişlik belirle (isteğe bağlı) */
     margin: 0 auto; /* Ortala (isteğe bağlı) */
-    background-color: aqua; /* Arka plan rengi (debug için) */
 }
 .enemyDeckContainer {
     flex: 1; /* 1 birim genişler */
-    background-color: brown;
-    height: 253px;
+    height: 200px;
     display: flex;
     justify-content: center;
 }
 
-.enemyDeck {
-    
-}
 .enemyHandContainer {
     flex: 2; /* 2 birim genişler */
-    background-color: blue;
-    height: 253px;
+    height: 100%;
     display: flex;
-    justify-content:space-evenly;
-    gap: 20px;
-
+    top: 0;
+    gap: 10px;
+    background-color: red;
 }
 
 .enemyDiscardContainer {
+    display: flex;
+    justify-content: center;
     flex: 1; /* 1 birim genişler */
-    background-color: beige;
-    height: 253px;
+    height: 200px;
+}
+
+.shopSection {
+    display: flex;
+}
+
+.availableCardsContainer {
+    flex: 2;
+ display: flex;
+ align-items: center;
+ width: 1920px;
+ height: 467;
+ justify-content: space-evenly;
+
+}
+
+
+.shopDecksContainer {
+    flex: 1;
+    gap: 10%;
+    display: flex;
+}
+
+
+.playerSection {
+    display: flex;
+}
+.discardContainer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.playerHandContainer {
+    display: flex;
+    gap: 10px;
+}
+
+.playerDeckContainer {
+
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shopDecks {
+    cursor: pointer;
+}
+
+.availableCards {
+    cursor: pointer;
+}
+.playerCards {
+    cursor: pointer;
+}
+
+.playerDeck {
+    cursor: pointer;
+}
+
+.discardCards {
+    cursor: pointer;
+}
+
+.enemyDeck {
+    cursor: pointer;
+}
+
+.enemyCard {
+    cursor: pointer;
+}
+
+.enemyDiscard {
+    cursor: pointer;
 }
