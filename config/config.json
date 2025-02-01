@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "your_password",
+    "database": "cosmic_conquest_db",
+    "host": "127.0.0.1",
+    "dialect": "mariadb"
+  },
+  "test": {
+    "username": "root",
+    "password": "your_password",
+    "database": "test_cosmic_conquest",
+    "host": "127.0.0.1",
+    "dialect": "mariadb"
+  },
+  "production": {
+    "username": "root",
+    "password": "your_password",
+    "database": "prod_cosmic_conquest",
+    "host": "127.0.0.1",
+    "dialect": "mariadb"
+  }
+}
