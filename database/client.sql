@@ -1,4 +1,5 @@
 CREATE TABLE client(
+    Id INT AUTO_INCREMENT PRIMARY KEY,
 	Username varchar(30),
     Password varchar(255),
     Email varchar(255),
