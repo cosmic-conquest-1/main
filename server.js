@@ -1,6 +1,6 @@
 require('dotenv').config(); // Load environment variables from .env
 
-const http = require('http');
+const https = require('https');
 const express = require('express');
 const { Server } = require('socket.io');
 const bcrypt = require('bcrypt');
@@ -91,7 +91,8 @@ app.post('/signup', async (req, res) => {
 
 (async function startServer() {
     try {
-        const server = http.createServer(app); // Use HTTP instead of HTTPS
+        const { key, cert } = await loadCertificates();
+        const server = https.createServer({ key, cert }, app);
         const io = new Server(server);
 
         io.on('connection', (socket) => {
@@ -101,8 +102,9 @@ app.post('/signup', async (req, res) => {
             });
         });
 
+        // Start the HTTPS server on the port specified in the .env file
         server.listen(process.env.PORT, () => {
-            console.log(`Server is running on http://localhost:${process.env.PORT}`);
+            console.log(`Server is running on https://localhost:${process.env.PORT}`);
         });
     } catch (err) {
         console.error('Error starting server:', err.message);
