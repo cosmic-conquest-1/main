@@ -1,0 +1,140 @@
+body {
+    font-family: 'Montserrat';
+    color: white;
+    background: url('images/background.png') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    height: 100vh; /* Ensure the body takes the full viewport height */
+    display: flex;
+    font-size: 2vh;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    /* Disable highlighting (user select)*/
+    user-select: none; /* Standard syntax */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+#centerer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#login, #sign-up {
+    display: flex; /* Make the element a flex container */
+    padding: 5vh;
+    border-radius: 2vh;
+    backdrop-filter: blur(5vh);
+    flex-direction: column; /* Arrange items in a column */
+    align-items: flex-end; /* Align content to the right */
+    text-align: right; /* Align text to the right */
+    height: fit-content;
+    width: fit-content; /* Set a fixed width to prevent shifts */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition for visibility change */
+}
+
+#finding-match {
+    display: none;
+    position: absolute;
+    z-index: 999;
+    padding: 5vh;
+    border-radius: 2vh;
+    backdrop-filter: blur(5vh);
+    width: 33vh;
+}
+
+#faction-select {
+    display: none;
+    position: absolute;
+    z-index: 999;
+}
+
+#faction-select img {
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    vertical-align: middle; /* Align the image properly */
+    cursor: pointer;
+    max-width: 100%; /* Ensure images do not exceed container width */
+}
+
+#selectEarth, #selectMoon, #selectSun, #selectBlackHole {
+    padding: 0;
+    background-color: transparent;
+    transform: scale(1.5);
+    cursor: pointer;
+    margin: 10vh;
+    z-index: 999;
+    box-sizing: unset;
+    border: none;
+    outline: none;
+    overflow: hidden;
+}
+
+#sign-up {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+button {
+    margin: 10px 0; /* Ensure consistent vertical margin */
+    padding: 1vh 2vh; /* Ensure consistent padding */
+    border: none;
+    border-radius: .5vh;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    font-size: 3vh; /* Ensure consistent font size */
+    font-family: 'Montserrat', sans-serif; /* Use Montserrat font */
+    font-weight: bold; /* Ensure font weight is normal (not bold) */
+    box-sizing: border-box; /* Include padding and border in element’s total width and height */
+}
+
+button:hover {
+    background-color: #555;
+}
+
+input {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: .8vh;
+    box-sizing: border-box; /* Include padding and border in element’s total width and height */
+}
+
+/* Style for the links */
+#needAccount, #haveAccount {
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+#needAccount:hover, #haveAccount:hover {
+    text-decoration: underline;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with 50% opacity */
+    opacity: 0; /* Start as fully transparent */
+    visibility: hidden; /* Start as hidden */
+    z-index: 998; /* Ensure it appears above other content */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth fade effect */
+}
+
+#overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}

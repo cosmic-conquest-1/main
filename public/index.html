@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+    <title>Cosmic Clash</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Cosmic Clash is an exciting space-themed card game where you battle for supremacy.">
+    <meta name="keywords" content="card, game, cosmic, clash, space">
+    <meta name="author" content="Cyberbolic">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="indexv0_0.css">
+</head>
+<body id="body">
+    <div id="centerer">
+        <div id="login">
+            <form action="/login" method="post">
+                <div>
+                    <label>Username: </label><input type="text" name="username"> <br>
+                </div>
+                <div>
+                    <label>Password: </label><input type="password" name="password"> <br>
+                    <button type="submit">Login</button>
+                </div>
+            </form>
+            <a href="#" id="needAccount">Need an account?</a>
+        </div>
+        <div id="sign-up" style="display: none;">
+            <form action="/signup" method="post">
+                <label>Username: </label><input type="text" name="username"> <br>
+                <label>Password: </label><input type="password" name="password"> <br>
+                <button type="submit">Sign Up</button>
+            </form>
+            <a href="#" id="haveAccount">Already have an account?</a>
+        </div>
+    </div>
+
+
+    <div id="main-menu" style="display: none;">
+        <div style="display: flex; flex-direction: column; padding: 10vh; border-radius: 2vh; backdrop-filter: blur(5vh);">
+            <button id="play">Play</button>
+            <button id="factionSelect">Select Faction</button>
+            <button id="leaderboard">Leaderboard</button>
+            <button id="support">Support</button>
+        </div>
+    </div>
+
+    <div id="faction-select">
+        <button id="selectEarth">
+            <img src="images/EarthCard.png">
+        </button>
+        <button id="selectMoon">
+            <img src="images/MoonCard.png">
+        </button>
+        <button id="selectSun">
+            <img src="images/SunCard.png">
+        </button>
+        <button id="selectBlackHole">
+            <img src="images/BlackHoleCard.png">
+        </button>
+    </div>
+
+    <div id="finding-match" style="display: none">
+        <div style="display: flex; flex-direction: column;">
+            <h1>Finding Match</h1>
+            <p>Take a few seconds to enjoy this moment in space and time.</p>
+            <button id="cancel">Cancel</button>
+        </div>
+    </div>
+
+    <div id="arena" style="display: none;">
+        <div id="opponent">
+            <!-- Content for opponent -->
+        </div>
+        <div id="shop">
+            <!-- Content for shop -->
+        </div>
+        <div id="player">
+            <div id="discard">
+                <!-- Content for discard -->
+            </div>
+            <div id="hand">
+                <!-- Content for hand -->
+            </div>
+            <div id="deck">
+                <!-- Content for deck -->
+            </div>
+        </div>
+    </div>
+
+    <div id="overlay">
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
