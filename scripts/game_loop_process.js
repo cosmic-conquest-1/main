@@ -2,15 +2,15 @@ const { query } = require("./database");
 const { Server } = require("socket.io");
 
 async function startGameLoop(player1, player2) {
-    console.log(`🔥 Game Started: Player ${player1} vs Player ${player2}`);
+    console.log(` Game Started: Player ${player1} vs Player ${player2}`);
 
     const io = new Server(3001); // WebSocket server
 
     io.on("connection", (socket) => {
-        console.log(`✅ Player connected: ${socket.id}`);
+        console.log(` Player connected: ${socket.id}`);
 
         socket.on("player_move", async (data) => {
-            console.log(`🎮 Move received: ${data}`);
+            console.log(` Move received: ${data}`);
 
             // Check if the move is valid
             const isValid = true; // Placeholder logic
