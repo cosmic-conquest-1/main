@@ -188,3 +188,43 @@ body {
     border-radius: 10px;
     z-index: 1000;
 }
+
+.played-value-counter {
+    position: fixed;
+    right: 20px;
+    top: 80px; /* total-value-counter'ın altında */
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+/* Oynanmış kartlar için sabit pozisyon */
+.played-card {
+    position: fixed !important;
+    top: 40% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 100;
+}
+
+@keyframes shake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(1deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-1deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.playerDeck, .discardCards {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.playerDeck:hover, .discardCards:hover {
+    animation: shake 0.2s ease-in-out infinite;
+    filter: brightness(1.2); /* Hafif parlama efekti */
+}

@@ -6,8 +6,107 @@ async function loadGameState() {
         updateRound(gameState);
         updateCardVisibility(gameState);
         updateTotalValue(gameState);
+        setupDraggableCards();
     } catch (error) {
         console.error('Error loading game state:', error);
+    }
+}
+
+// Global değişkenler
+let selectedCards = new Set();
+let availableCredits = 0;
+let playedValue = 0;
+
+// Sürüklenebilir kartları ayarla
+function setupDraggableCards() {
+    const playerCards = document.querySelectorAll('.playerCards');
+    playerCards.forEach(card => {
+        card.addEventListener('mousedown', startDragging);
+    });
+
+    // Shop kartlarına tıklama olayı ekle
+    const shopCards = document.querySelectorAll('.availableCards');
+    shopCards.forEach(card => {
+        card.addEventListener('click', tryToBuyCard);
+    });
+}
+
+// Kart sürükleme başlangıcı
+function startDragging(e) {
+    const card = e.currentTarget;
+    const startY = e.clientY;
+    const cardRect = card.getBoundingClientRect();
+    const cardValue = parseInt(card.getAttribute('data-value')) || 0;
+    let isPlayed = false;
+
+    function onMouseMove(e) {
+        const currentY = e.clientY;
+        const dragDistance = startY - currentY;
+        const cardHeight = cardRect.height;
+        const dragPercentage = (dragDistance / cardHeight) * 100;
+
+        // Kartı yukarı sürükle
+        if (!isPlayed) {
+            card.style.transform = `translateY(${-dragDistance}px)`;
+        }
+
+        // Eğer %33 yukarı sürüklendiyse
+        if (dragPercentage >= 33 && !isPlayed) {
+            isPlayed = true;
+            if (!selectedCards.has(card)) {
+                selectedCards.add(card);
+                playedValue += cardValue;
+                updatePlayedValue();
+                // Kartı ortaya sabitle
+                card.classList.add('played-card');
+                card.style.opacity = '0.6';
+            }
+        }
+    }
+
+    function onMouseUp() {
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+        
+        // Eğer kart oynanmadıysa orijinal konumuna geri dön
+        if (!isPlayed) {
+            card.style.transform = '';
+        }
+    }
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+}
+
+// Oynanan kartların değerini güncelle
+function updatePlayedValue() {
+    const playedValueElement = document.getElementById('playedValue');
+    if (playedValueElement) {
+        playedValueElement.textContent = playedValue;
+    }
+}
+
+// Kart satın alma denemesi
+function tryToBuyCard(e) {
+    const shopCard = e.currentTarget;
+    const cardCost = parseInt(shopCard.getAttribute('data-value')) || 0;
+
+    if (playedValue >= cardCost) {
+        // Seçili kartları oynat ve shop kartını satın al
+        selectedCards.forEach(card => {
+            card.style.display = 'none';
+            card.classList.remove('played-card');
+        });
+        
+        // Değişkenleri sıfırla
+        selectedCards.clear();
+        playedValue = 0;
+        updatePlayedValue();
+        
+        // Shop kartını kaldır
+        shopCard.style.display = 'none';
+    } else {
+        alert('Yetersiz kredi!');
     }
 }
 
@@ -49,7 +148,9 @@ function updateCardVisibility(gameState) {
                 cardElement.style.display = 'block';
                 const card = playerHand[i-1];
                 
-                // Kart tipine göre SVG dosyasını belirle
+                // Kart değerini data-value olarak ekle
+                cardElement.setAttribute('data-value', card.value);
+                
                 let cardSvgPath;
                 if (card.type === 'number') {
                     cardSvgPath = `../public/images/cards/number${card.value}card.svg`;
@@ -59,7 +160,6 @@ function updateCardVisibility(gameState) {
                     cardSvgPath = '../public/images/cards/BlackHoleCard.svg';
                 }
 
-                // SVG'yi yükle ve göster
                 cardElement.innerHTML = `<img src="${cardSvgPath}" width="170" height="255" style="border-radius: 10px;">`;
             } else {
                 cardElement.style.display = 'none';
