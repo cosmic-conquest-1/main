@@ -106,18 +106,18 @@ class Shop {
 class Game {
     constructor(sessionId1, faction1, sessionId2, faction2) {
         this.players = [new Player(0,sessionId1,faction1), new Player(1,sessionId2,faction2)]
-        turn = 0;
+        this.turn = 0;
         this.shop = new Shop;
         this.playedCard = null;
     }
 
     playMoonCard() {
-        this.players[turn].discard.push(this.players[turn].hand.splice(playedCard,1));
-        this.players[turn].discard.push(this.players[(turn + 1)%2].hand.splice(Math.floor(Math.random() * this.players[(turn + 1)%2].hand.length),1));
+        this.players[this.turn].discard.push(this.players[turn].hand.splice(playedCard,1));
+        this.players[this.turn].discard.push(this.players[(turn + 1)%2].hand.splice(Math.floor(Math.random() * this.players[(turn + 1)%2].hand.length),1));
     }
     
     playEarthCard() {
-        this.players[turn].discard.push(this.players[turn].hand.splice(playedCard,1));
+        this.players[this.turn].discard.push(this.players[this.turn].hand.splice(playedCard,1));
         let lowestCard = null;
         if (this.shop.powerCardSlot!=null){
             lowestCard = this.shop.powerCardSlot;
@@ -142,35 +142,36 @@ class Game {
     }
 
     playSunCard() {
-        this.players[turn].discard.push(this.players[turn].hand.splice(playedCard,1));
-        this.players[turn].credits+=10;
+        this.players[this.turn].discard.push(this.players[this.turn].hand.splice(playedCard,1));
+        this.players[this.turn].credits+=10;
     }
 
     playBlackholeCard() {
-        this.players[turn].discard.push(this.players[turn].hand.splice(playedCard,1));
+        this.players[this.turn].discard.push(this.players[this.turn].hand.splice(playedCard,1));
     }
 
     playNumberCard() {
-        this.players[turn].credits += this.players[turn].hand.playedCard.value;
-        this.players[turn].discard.push(this.players[turn].hand.splice(playedCard,1));
+        this.players[this.turn].credits += this.players[this.turn].hand.playedCard.value;
+        this.players[this.turn].discard.push(this.players[this.turn].hand.splice(playedCard,1));
     }
 
     endTurn() {
         shop.resetShop();
-        this.players[turn].credits = 0;
-        while (this.players[turn].hand.length < 5 ){
-            if (this.players[turn].deck.length == 0){
-                shuffle(this.players[turn].discard);
-                while (this.players[turn].discard > 0){
-                    this.players[turn].deck.push(this.players[turn].discard.pop());
+        this.players[this.turn].credits = 0;
+        while (this.players[this.turn].hand.length < 5 ){
+            if (this.players[this.turn].deck.length == 0){
+                shuffle(this.players[this.turn].discard);
+                while (this.players[this.turn].discard > 0){
+                    this.players[this.turn].deck.push(this.players[this.turn].discard.pop());
                 }
             }
         }
-        turn += 1;
-        turn %= 2;
+        this.turn += 1;
+        this.turn %= 2;
     }
 }
 
-let test = new Shop();
+let test = new Game('1',1,'2',0);
+test.shop.resetShop()
 
-console.log(test.powerCardSlot);
+console.log(test);
