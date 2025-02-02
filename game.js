@@ -116,57 +116,100 @@ class Game {
     }
 
     playMoonCard() {
-        this.players[this.turn].discard.push(this.players[turn].hand.splice(this.playedCard,1));
-        this.players[this.turn].discard.push(this.players[(turn + 1)%2].hand.splice(Math.floor(Math.random() * this.players[(turn + 1)%2].hand.length),1));
+        this.players[this.turn].discard.push(this.players[this.turn].hand.splice(this.playedCard,1)[0]);
+        this.players[this.turn].discard.push(this.players[(this.turn + 1)%2].hand.splice(Math.floor(Math.random() * this.players[(this.turn + 1)%2].hand.length),1)[0]);
     }
     
     playEarthCard() {
-        this.players[this.turn].discard.push(this.players[this.turn].hand.splice(this.playedCard,1));
+        // Remove the card from the player's hand and add it to their discard pile
+        this.players[this.turn].discard.push(this.players[this.turn].hand.splice(this.playedCard, 1)[0]);
+    
         let lowestCard = null;
-        if (this.shop.powerCardSlot!=null){
+    
+        // Check the powerCardSlot first (if it exists)
+        if (this.shop.powerCardSlot !== null) {
             lowestCard = this.shop.powerCardSlot;
         }
-        let counter = 0;
-        while (counter < 4 && lowestCard == null){
-            if (this.shop.numberCardSlots[counter]!=null && this.shop.numberCardSlots[counter].value < lowestCard.value){
-                lowestCard = this.shop.numberCardSlots[counter];
-            }
-            counter += 1;
-        }
-        if (lowestCard == null){
-            return;
-        }
-        else {
-            for (let i = 0; i < 4; i++){
-                if (this.shop.numberCardSlots[i]!=null && this.shop.numberCardSlots[i].value<lowestCard.value){
+    
+        // Loop through the numberCardSlots to find the lowest value card
+        for (let i = 0; i < 4; i++) {
+            if (this.shop.numberCardSlots[i] !== null) {
+                // If no lowestCard has been found yet or the current card is lower than the lowestCard
+                if (lowestCard === null || this.shop.numberCardSlots[i].value < lowestCard.value) {
                     lowestCard = this.shop.numberCardSlots[i];
                 }
             }
         }
-        this.players[this.turn].discard.push(lowestCard);
-
-        
+    
+        // If a lowestCard is found, add it to the player's hand
+        if (lowestCard !== null) {
+            this.players[this.turn].hand.push(lowestCard);  // Add to player's hand
+    
+            // Optional: Remove the card from the shop (if you need to)
+            // For example, remove the card from the numberCardSlots or powerCardSlot
+            // This can be adjusted based on the rules of your game, but here's how you might do it:
+            if (lowestCard === this.shop.powerCardSlot) {
+                this.shop.powerCardSlot = null; // Clear the power card slot after it's taken
+            } else {
+                // Find the index of the lowest card in numberCardSlots and remove it
+                const cardIndex = this.shop.numberCardSlots.indexOf(lowestCard);
+                if (cardIndex !== -1) {
+                    this.shop.numberCardSlots[cardIndex] = null; // Remove the card from the slot
+                }
+            }
+        }
     }
+    
 
     playSunCard() {
-        this.players[this.turn].discard.push(this.players[this.turn].hand.splice(this.playedCard,1));
+        this.players[this.turn].discard.push(this.players[this.turn].hand.splice(this.playedCard,1)[0]);
         this.players[this.turn].credits+=10;
     }
 
     playBlackholeCard() {
-        this.players[this.turn].discard.push(this.players[this.turn].hand.splice(this.playedCard,1));
+        // Step 1: Discard the Blackhole card itself
+        const blackholeCard = this.players[this.turn].hand.splice(this.playedCard, 1)[0];  // Remove the Blackhole card from the player's hand
+        this.players[this.turn].discard.push(blackholeCard);  // Add it to the discard pile
+    
+        // Step 2: Remove a random card from the current player's hand
+        if (this.players[this.turn].hand.length > 0) {
+            this.players[this.turn].hand.splice(Math.floor(Math.random() * this.players[this.turn].hand.length), 1);
+        }
+    
+        // Step 3: Remove a random card from the opponent's hand
+        if (this.players[(this.turn + 1) % 2].hand.length > 0) {
+            this.players[(this.turn + 1) % 2].hand.splice(Math.floor(Math.random() * this.players[(this.turn + 1) % 2].hand.length), 1);
+        }
     }
+    
 
     playNumberCard() {
         this.players[this.turn].credits += this.players[this.turn].hand[this.playedCard].value;
-        this.players[this.turn].discard.push(this.players[this.turn].hand.splice(this.playedCard,1));
+        this.players[this.turn].discard.push(this.players[this.turn].hand.splice(this.playedCard,1)[0]);
+    }
+
+    playCard() {
+        let cardToPlay = this.players[this.turn].hand[this.playedCard];
+        if (cardToPlay.type == 'number'){
+            this.playNumberCard();
+        } else if(cardToPlay.type == 'Sun'){
+            this.playSunCard();
+        }
+        else if(cardToPlay.type == 'Earth'){
+            this.playEarthCard();
+        }
+        else if(cardToPlay.type == 'Moon'){
+            this.playMoonCard();
+        }else if(cardToPlay.type == 'Blackhole'){
+            this.playBlackholeCard();
+        }
     }
 
     buyNumberCard() {
         if (this.players[this.turn].credits >= this.shop.numberCardSlots[this.boughtCard].value){
-            credits -= this.shop.numberCardSlots[this.boughtCard].value;
+            this.players[this.turn].credits -= this.shop.numberCardSlots[this.boughtCard].value;
             this.players[this.turn].discard.push(this.shop.numberCardSlots[this.boughtCard]);
-            this.shop.powerCardSlot[this.boughtCard] = null;
+            this.shop.numberCardSlots[this.boughtCard] = null;
         }
         else {
             console.log("Not enough credits");
@@ -174,7 +217,7 @@ class Game {
     }
 
     endTurn() {
-        shop.resetShop();
+        this.shop.resetShop();
         this.players[this.turn].credits = 0;
         while (this.players[this.turn].hand.length < 5 ){
             if (this.players[this.turn].deck.length == 0){
