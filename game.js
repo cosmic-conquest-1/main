@@ -110,6 +110,7 @@ class Game {
         this.turn = 0;
         this.shop = new Shop;
         this.playedCard = null;
+        this.boughtCard = null;
     }
 
     playMoonCard() {
@@ -125,9 +126,10 @@ class Game {
         }
         let counter = 0;
         while (counter < 4 && lowestCard == null){
-            if (this.shop.numberCardSlots[counter]!=null){
+            if (this.shop.numberCardSlots[counter]!=null && this.shop.numberCardSlots[counter].value < lowestCard.value){
                 lowestCard = this.shop.numberCardSlots[counter];
             }
+            counter += 1;
         }
         if (lowestCard == null){
             return;
@@ -139,6 +141,8 @@ class Game {
                 }
             }
         }
+        this.players[this.turn].discard.push(lowestCard);
+
         
     }
 
@@ -156,6 +160,11 @@ class Game {
         this.players[this.turn].discard.push(this.players[this.turn].hand.splice(playedCard,1));
     }
 
+    buyNumberCard() {
+        this.players[turn].discard.push(this.shop.numberCardSlots[this.boughtCard]);
+        this.shop.powerCardSlot[this.boughtCard] = null;
+    }
+
     endTurn() {
         shop.resetShop();
         this.players[this.turn].credits = 0;
@@ -170,9 +179,50 @@ class Game {
         this.turn += 1;
         this.turn %= 2;
     }
+    sanitize(playerId) {
+        // Clone the game object
+        let sanitizedGame = JSON.parse(JSON.stringify(this));
+    
+        // Update players
+        sanitizedGame.players = sanitizedGame.players.map(player => {
+            if (player.id !== playerId) {
+                // Clone enemy player
+                let enemyPlayer = { ...player };
+                
+                // Hide the enemy hand (only show length)
+                enemyPlayer.hand = player.hand.length; // Only show hand length for enemy
+                // Show lengths for the deck and discard piles
+                enemyPlayer.deck = player.deck.length;
+                enemyPlayer.discard = player.discard.length;
+                
+                return enemyPlayer;
+            } else {
+                // Clone the current player
+                let currentPlayer = { ...player };
+                
+                // For current player, show full hand with card details
+                // Ensure that each card in hand is represented by its properties (type, value, etc.)
+                currentPlayer.hand = player.hand.map(card => {
+                    return { type: card.type, value: card.value }; // Adjust based on the actual structure of a card
+                });
+                
+                // Show the length for deck and discard piles
+                currentPlayer.deck = player.deck.length;
+                currentPlayer.discard = player.discard.length;
+    
+                return currentPlayer;
+            }
+        });
+    
+        return sanitizedGame;
+    }
 }
+      
+
 
 let test = new Game('1',1,'2',0);
-test.shop.resetShop()
+test.shop.resetShop();
 
-console.log(test);
+console.log(test.sanitize('1').players);
+
+module.exports = Game;
