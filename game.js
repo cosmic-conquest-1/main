@@ -114,12 +114,12 @@ class Game {
     }
 
     playMoonCard() {
-        this.players[this.turn].discard.push(this.players[turn].hand.splice(playedCard,1));
+        this.players[this.turn].discard.push(this.players[turn].hand.splice(this.playedCard,1));
         this.players[this.turn].discard.push(this.players[(turn + 1)%2].hand.splice(Math.floor(Math.random() * this.players[(turn + 1)%2].hand.length),1));
     }
     
     playEarthCard() {
-        this.players[this.turn].discard.push(this.players[this.turn].hand.splice(playedCard,1));
+        this.players[this.turn].discard.push(this.players[this.turn].hand.splice(this.playedCard,1));
         let lowestCard = null;
         if (this.shop.powerCardSlot!=null){
             lowestCard = this.shop.powerCardSlot;
@@ -147,22 +147,28 @@ class Game {
     }
 
     playSunCard() {
-        this.players[this.turn].discard.push(this.players[this.turn].hand.splice(playedCard,1));
+        this.players[this.turn].discard.push(this.players[this.turn].hand.splice(this.playedCard,1));
         this.players[this.turn].credits+=10;
     }
 
     playBlackholeCard() {
-        this.players[this.turn].discard.push(this.players[this.turn].hand.splice(playedCard,1));
+        this.players[this.turn].discard.push(this.players[this.turn].hand.splice(this.playedCard,1));
     }
 
     playNumberCard() {
-        this.players[this.turn].credits += this.players[this.turn].hand.playedCard.value;
-        this.players[this.turn].discard.push(this.players[this.turn].hand.splice(playedCard,1));
+        this.players[this.turn].credits += this.players[this.turn].hand[this.playedCard].value;
+        this.players[this.turn].discard.push(this.players[this.turn].hand.splice(this.playedCard,1));
     }
 
     buyNumberCard() {
-        this.players[turn].discard.push(this.shop.numberCardSlots[this.boughtCard]);
-        this.shop.powerCardSlot[this.boughtCard] = null;
+        if (this.players[this.turn].credits >= this.shop.numberCardSlots[this.boughtCard].value){
+            credits -= this.shop.numberCardSlots[this.boughtCard].value;
+            this.players[this.turn].discard.push(this.shop.numberCardSlots[this.boughtCard]);
+            this.shop.powerCardSlot[this.boughtCard] = null;
+        }
+        else {
+            console.log("Not enough credits");
+        }
     }
 
     endTurn() {
@@ -217,12 +223,6 @@ class Game {
         return sanitizedGame;
     }
 }
-      
 
+module.exports = Game = { Game }
 
-let test = new Game('1',1,'2',0);
-test.shop.resetShop();
-
-console.log(test.sanitize('1').players);
-
-module.exports = { Game };
