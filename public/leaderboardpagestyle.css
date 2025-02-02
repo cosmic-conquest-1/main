@@ -1,0 +1,97 @@
+/* General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #22242b;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Leaderboard Container */
+.leaderboard {
+    margin: 50px auto;
+    width: 60%;
+    max-width: 600px;
+    background: #1c2541;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+}
+
+th {
+    background-color: #3a506b;
+    font-size: 1.2em;
+}
+
+tr:nth-child(even) {
+    background-color: #1f4068;
+}
+
+tr:nth-child(odd) {
+    background-color: #162447;
+}
+
+/* Hover Effect */
+tbody tr:hover {
+    background-color: #3a506b;
+    transition: 0.3s ease-in-out;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .leaderboard {
+        width: 90%;
+    }
+    th, td {
+        padding: 10px;
+    }
+}
+
+button {
+    background-color: #ff4f5e;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+button:hover {
+    background-color: #ff2e44;
+}
+
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('fonts/myfont.woff2') format('woff2'),
+         url('fonts/myfont.woff') format('woff'),
+         url('fonts/myfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Apply it globally or to specific elements */
+body {
+    font-family: 'MyCustomFont', sans-serif;
+}
+
+body {
+    background-image: url('images/Background Art 1.svg'); /* Path to your image */
+    background-size: cover; /* Ensures the image covers the whole screen */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling */
+}
+

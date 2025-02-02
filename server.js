@@ -195,4 +195,59 @@ app.post('/login', async (req, res) => {
     }
 });
 
+<<<<<<< Updated upstream
 //12312
+=======
+// Login endpoint
+app.get('/leaderboard', async (req, res) => {
+    try {
+        // Query top 10 users by rating in descending order
+        const [rows] = await pool.query(
+            'SELECT Username, Rating FROM ratings_table ORDER BY Rating DESC LIMIT 10'
+        );
+
+        res.json({ success: true, leaderboard: rows }); // Send the leaderboard data
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message });
+    }
+});
+
+
+// Call the function on page load
+document.addEventListener('DOMContentLoaded', loadLeaderboard);
+
+/*
+app.post('/leaderboard', async (req, res) => {
+    try {
+        const [rows] = await pool.query('SELECT Rating FROM client ORDER BY rating DESC LIMIT 10', [leaderboarddata]);
+        const user = rows[0];
+
+});
+*/
+/*
+function calculateMMR(player1MMR, player2MMR, winner) {
+    const K = 32 * 1.3; // Scaling factor for MMR changes
+    
+    // Calculate expected win probabilities
+    const expectedP1 = 1 / (1 + Math.pow(10, (player2MMR - player1MMR) / 400));
+    const expectedP2 = 1 / (1 + Math.pow(10, (player1MMR - player2MMR) / 400));
+
+    let newP1MMR, newP2MMR;
+
+    if (winner === 1) { // Player 1 wins
+        newP1MMR = player1MMR + K * (1 - expectedP1);
+        newP2MMR = player2MMR + K * (0 - expectedP2);
+    } else if (winner === 2) { // Player 2 wins
+        newP1MMR = player1MMR + K * (0 - expectedP1);
+        newP2MMR = player2MMR + K * (1 - expectedP2);
+    } else {
+        throw new Error("Winner must be either 1 or 2");
+    }
+
+    return {
+        player1NewMMR: Math.round(newP1MMR),
+        player2NewMMR: Math.round(newP2MMR)
+    };
+}
+*/
+>>>>>>> Stashed changes

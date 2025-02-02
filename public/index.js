@@ -332,8 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('leaderboard')?.addEventListener('click', function(event) {
-        event.preventDefault();
-        alert('Come back later.');
+        window.location.href = "leaderboardpage.html";
     });
 
     document.getElementById('support')?.addEventListener('click', function(event) {
