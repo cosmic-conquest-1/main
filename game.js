@@ -105,7 +105,7 @@ class Shop {
 
 class Game {
     constructor(sessionId1, sessionId2) {
-        this.players = [new Player(0,sessionId1), new Player(1,sessionId2)]
+        this.players = [new Player(0,sessionId1,faction), new Player(1,sessionId2,faction)]
         turn = 0;
         this.shop = new Shop;
         this.playedCard = null;
