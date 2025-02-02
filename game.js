@@ -21,6 +21,7 @@ class Card {
 //Test
 class Player {
     constructor(turnOrder, sessionId, faction){
+        this.turnOrder = turnOrder;
         this.id=sessionId;
         this.deck = [];
         this.hand = [];
