@@ -1,11 +1,11 @@
 function startGame() {
     alert("Starting the game...");
-    window.location.href = "game.html"; // Redirect to the game page
+    window.location.href = "gameboard.html"; // Redirect to the game page
 }
 
 function openLeaderboard() {
     alert("Opening leaderboard...");
-    window.location.href = "leaderboard.html";
+    window.location.href = "leaderboardpage.html";
 }
 
 function openTutorial() {
