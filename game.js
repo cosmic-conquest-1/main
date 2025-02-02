@@ -20,6 +20,7 @@ class Card {
 
 class Player {
     constructor(turnOrder, sessionId, faction){
+        this.id=sessionId;
         this.deck = [];
         this.hand = [];
         this.discard = [];
