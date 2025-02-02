@@ -4,11 +4,20 @@
     box-sizing: border-box;
 }
 
+body {
+    background-image: url('../../public/images/cards/backgroundSpaceArt.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
 .container {
     display: flex;
     flex-direction:column;
     /* background-color: red; */
     gap: 15px;
+
 }
 .enemySection {
     display: flex;
@@ -30,7 +39,7 @@
     display: flex;
     top: 0;
     gap: 10px;
-    background-color: red;
+    /* background-color: red; */
 }
 
 .enemyDiscardContainer {
@@ -95,6 +104,21 @@
 }
 .playerCards {
     cursor: pointer;
+    width: 170px;
+    height: 255px;
+    display: none; /* Varsayılan olarak gizli */
+    transition: transform 0.3s ease; /* Animasyon efekti için */
+}
+
+.playerCards:hover {
+    transform: translateY(-20px); /* Hover durumunda yukarı kalkma efekti */
+}
+
+.playerCards img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Hafif gölge efekti */
 }
 
 .playerDeck {
@@ -115,4 +139,52 @@
 
 .enemyDiscard {
     cursor: pointer;
+}
+
+.card-content {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.playerCards:hover .card-content,
+.availableCards:hover .card-content {
+    transform: translateY(-10px);
+    cursor: pointer;
+}
+
+.card-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+    border-radius: 10px;
+}
+
+.round-counter {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+.total-value-counter {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    border-radius: 10px;
+    z-index: 1000;
 }

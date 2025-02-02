@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Ongoing vs. [playername] </title>
-    <link rel="stylesheet" href="gameboardstyle.css">
+    <link rel="stylesheet" href="styles/gameboardstyle.css">
+    <script src="scripts/gameboard.js"></script>
 </head>
 <body>
     <div class="container">
+        <div class="round-counter">Round: <span id="currentRound">1</span></div>
+        <div class="total-value-counter">Credits to Spend: <span id="totalValue">0</span></div>
         <div class="enemySection">
             <div class="enemyDeckContainer">
                 <div class="enemyDeck" id="enemyDeck1"><svg width="195.5" height="200" viewBox="0 0 219 224" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -18,26 +21,86 @@
                     </div>
             </div>
             <div class="enemyHandContainer">
-                <div class="enemyCard" id="enemyCard1"><svg width="140" height="143" viewBox="0 0 170 166" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect y="-89" width="170" height="255" rx="10" fill="#ABA9B5"/>
+                <div class="enemyCard" id="enemyCard1">
+                    <svg width="140" height="143" viewBox="0 0 170 166" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g filter="url(#filter0_b_19_1129)">
+                            <rect y="-89" width="170" height="255" rx="10" fill="white" fill-opacity="0.06"/>
+                            <rect x="0.15" y="-88.85" width="169.7" height="254.7" rx="9.85" stroke="white" stroke-width="0.3"/>
+                        </g>
+                        <defs>
+                            <filter id="filter0_b_19_1129" x="-18" y="-107" width="206" height="291" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                <feGaussianBlur in="BackgroundImageFix" stdDeviation="9"/>
+                                <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_19_1129"/>
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_19_1129" result="shape"/>
+                            </filter>
+                        </defs>
                     </svg>
-                    </div>
-                <div class="enemyCard" id="enemyCard2"><svg width="140" height="143" viewBox="0 0 170 166" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect y="-89" width="170" height="255" rx="10" fill="#ABA9B5"/>
+                </div>
+                <div class="enemyCard" id="enemyCard2">
+                    <svg width="140" height="143" viewBox="0 0 170 166" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g filter="url(#filter0_b_19_1129)">
+                            <rect y="-89" width="170" height="255" rx="10" fill="white" fill-opacity="0.06"/>
+                            <rect x="0.15" y="-88.85" width="169.7" height="254.7" rx="9.85" stroke="white" stroke-width="0.3"/>
+                        </g>
+                        <defs>
+                            <filter id="filter0_b_19_1129" x="-18" y="-107" width="206" height="291" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                <feGaussianBlur in="BackgroundImageFix" stdDeviation="9"/>
+                                <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_19_1129"/>
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_19_1129" result="shape"/>
+                            </filter>
+                        </defs>
                     </svg>
-                    </div>
-                <div class="enemyCard" id="enemyCard3"><svg width="140" height="143" viewBox="0 0 170 166" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect y="-89" width="170" height="255" rx="10" fill="#ABA9B5"/>
+                </div>
+                <div class="enemyCard" id="enemyCard3">
+                    <svg width="140" height="143" viewBox="0 0 170 166" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g filter="url(#filter0_b_19_1129)">
+                            <rect y="-89" width="170" height="255" rx="10" fill="white" fill-opacity="0.06"/>
+                            <rect x="0.15" y="-88.85" width="169.7" height="254.7" rx="9.85" stroke="white" stroke-width="0.3"/>
+                        </g>
+                        <defs>
+                            <filter id="filter0_b_19_1129" x="-18" y="-107" width="206" height="291" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                <feGaussianBlur in="BackgroundImageFix" stdDeviation="9"/>
+                                <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_19_1129"/>
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_19_1129" result="shape"/>
+                            </filter>
+                        </defs>
                     </svg>
-                    </div>
-                <div class="enemyCard" id="enemyCard4"><svg width="140" height="143" viewBox="0 0 170 166" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect y="-89" width="170" height="255" rx="10" fill="#ABA9B5"/>
+                </div>
+                <div class="enemyCard" id="enemyCard4">
+                    <svg width="140" height="143" viewBox="0 0 170 166" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g filter="url(#filter0_b_19_1129)">
+                            <rect y="-89" width="170" height="255" rx="10" fill="white" fill-opacity="0.06"/>
+                            <rect x="0.15" y="-88.85" width="169.7" height="254.7" rx="9.85" stroke="white" stroke-width="0.3"/>
+                        </g>
+                        <defs>
+                            <filter id="filter0_b_19_1129" x="-18" y="-107" width="206" height="291" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                <feGaussianBlur in="BackgroundImageFix" stdDeviation="9"/>
+                                <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_19_1129"/>
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_19_1129" result="shape"/>
+                            </filter>
+                        </defs>
                     </svg>
-                    </div>
-                <div class="enemyCard" id="enemyCard5"><svg width="140" height="143" viewBox="0 0 170 166" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect y="-89" width="170" height="255" rx="10" fill="#ABA9B5"/>
+                </div>
+                <div class="enemyCard" id="enemyCard5">
+                    <svg width="140" height="143" viewBox="0 0 170 166" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g filter="url(#filter0_b_19_1129)">
+                            <rect y="-89" width="170" height="255" rx="10" fill="white" fill-opacity="0.06"/>
+                            <rect x="0.15" y="-88.85" width="169.7" height="254.7" rx="9.85" stroke="white" stroke-width="0.3"/>
+                        </g>
+                        <defs>
+                            <filter id="filter0_b_19_1129" x="-18" y="-107" width="206" height="291" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                <feGaussianBlur in="BackgroundImageFix" stdDeviation="9"/>
+                                <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_19_1129"/>
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_19_1129" result="shape"/>
+                            </filter>
+                        </defs>
                     </svg>
-                    </div>
+                </div>
             </div>
             <div class="enemyDiscardContainer">
                 <div class="enemyDiscard"><svg width="195.5" height="200" viewBox="0 0 219 224" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -97,21 +160,11 @@
             </div>
             <div class="handContainer">
                 <div class="playerHandContainer">
-                    <div class="playerCards" id="playerCard1"><svg width="170" height="255" viewBox="0 0 170 255" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="170" height="255" rx="10" fill="#ABA9B5"/>
-                        </svg></div>
-                    <div class="playerCards" id="playerCard2"><svg width="170" height="255" viewBox="0 0 170 255" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="170" height="255" rx="10" fill="#ABA9B5"/>
-                        </svg></div>
-                    <div class="playerCards" id="playerCard3"><svg width="170" height="255" viewBox="0 0 170 255" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="170" height="255" rx="10" fill="#ABA9B5"/>
-                        </svg></div>
-                    <div class="playerCards" id="playerCard4"><svg width="170" height="255" viewBox="0 0 170 255" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="170" height="255" rx="10" fill="#ABA9B5"/>
-                        </svg></div>
-                    <div class="playerCards" id="playerCard5"><svg width="170" height="255" viewBox="0 0 170 255" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="170" height="255" rx="10" fill="#ABA9B5"/>
-                        </svg></div>
+                    <div class="playerCards" id="playerCard1"></div>
+                    <div class="playerCards" id="playerCard2"></div>
+                    <div class="playerCards" id="playerCard3"></div>
+                    <div class="playerCards" id="playerCard4"></div>
+                    <div class="playerCards" id="playerCard5"></div>
                 </div>
             </div>
             <div class="playerDeckContainer">
