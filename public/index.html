@@ -40,24 +40,29 @@
         <div style="display: flex; flex-direction: column; padding: 10vh; border-radius: 2vh; backdrop-filter: blur(5vh);">
             <button id="play">Play</button>
             <button id="factionSelect">Select Faction</button>
-            <button id="leaderboard">Leaderboard</button>
+            <!-- <button id="leaderboard"><a href="leaderboardpage.html" target="_blank">Leaderboard</button></a> -->
+            <button id="leaderboard" onclick="window.location.href='frontend\leaderboardpage.html'">
+                Leaderboard
+              </button>
             <button id="support">Support</button>
         </div>
     </div>
 
     <div id="faction-select">
-        <button id="selectEarth" data-faction="earth">
-            <img src="images/EarthCard.png">
-        </button>
-        <button id="selectMoon" data-faction="moon">
-            <img src="images/MoonCard.png">
-        </button>
-        <button id="selectSun">
-            <img src="images/SunCard.png" data-faction="sun">
-        </button>
-        <button id="selectBlackHole" data-faction="black_hole">
-            <img src="images/BlackHoleCard.png">
-        </button>
+        <div class="factionbg">
+            <button id="selectEarth" data-faction="earth">    
+                <img src="images\Capitalist Miners Faction.svg" width="128" height="192">
+            </button>
+            <button id="selectMoon" data-faction="moon">
+                <img src="images\Space Pirates Faction.svg" width="128" height="192">
+            </button>
+            <button id="selectSun" data-faction="sun">
+                <img src="images\Sun People Faction.svg" width="128" height="192">
+            </button>
+            <button id="selectBlackHole" data-faction="black_hole">
+                <img src="images\Blackhole Faction.svg" width="128" height="192">
+            </button>
+        </div>
     </div>
 
     <div id="finding-match" style="display: none">

@@ -331,10 +331,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('overlay').classList.add('visible');
     });
 
-    document.getElementById('leaderboard')?.addEventListener('click', function(event) {
-        event.preventDefault();
-        alert('Come back later.');
-    });
+    // document.getElementById('leaderboard')?.addEventListener('click', function(event) {
+    //     event.preventDefault();
+    //     window.location.href = '../frontend/leaderboardpage.html';
+    // });
 
     document.getElementById('support')?.addEventListener('click', function(event) {
         event.preventDefault();
