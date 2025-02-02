@@ -18,6 +18,7 @@ class Card {
     }
 }
 
+//Test
 class Player {
     constructor(turnOrder, sessionId, faction){
         this.id=sessionId;
