@@ -1,10 +1,4 @@
-// Sample player data
-/*let players = [
-    { name : "Alice", score: 1500 },
-    { name: "Bob", score: 1350 },
-    { name: "Charlie", score: 1200 }
-];
-*/
+
 // Function to update the leaderboard dynamically
 function updateLeaderboard() {
     let tbody = document.getElementById("leaderboard-body");
@@ -39,7 +33,7 @@ function updateLeaderboard() {
 document.addEventListener("DOMContentLoaded", updateLeaderboard);
 
 function goHome() {
-    window.location.href = "----"; // Change this to your home page URL
+    window.location.href = "index.html"; // Change this to your home page URL
 }
 
 async function loadLeaderboard() {
@@ -48,17 +42,24 @@ async function loadLeaderboard() {
         const data = await response.json();
 
         if (data.success) {
-            const leaderboard = document.getElementById('leaderboard');
-            leaderboard.innerHTML = ''; // Clear existing list
+            const tbody = document.getElementById("leaderboard-body");
+            tbody.innerHTML = ""; // Clear existing rows
 
             data.leaderboard.forEach((player, index) => {
-                const entry = document.createElement('li');
-                entry.textContent = `#${index + 1} ${player.Username} - ${player.Rating} points`;
-                leaderboard.appendChild(entry);
+                let row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${player.Username}</td>
+                    <td>${player.Rating}</td>
+                `;
+                tbody.appendChild(row);
             });
+        } else {
+            console.error("Leaderboard data is missing:", data);
         }
     } catch (error) {
         console.error('Error loading leaderboard:', error);
     }
 }
+document.addEventListener("DOMContentLoaded", loadLeaderboard);
 

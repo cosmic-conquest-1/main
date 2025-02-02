@@ -195,15 +195,15 @@ app.post('/login', async (req, res) => {
     }
 });
 
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
 //12312
-=======
+//=======
 // Login endpoint
 app.get('/leaderboard', async (req, res) => {
     try {
         // Query top 10 users by rating in descending order
         const [rows] = await pool.query(
-            'SELECT Username, Rating FROM ratings_table ORDER BY Rating DESC LIMIT 10'
+            'SELECT Username, Rating FROM client ORDER BY Rating DESC LIMIT 10'
         );
 
         res.json({ success: true, leaderboard: rows }); // Send the leaderboard data
@@ -212,9 +212,6 @@ app.get('/leaderboard', async (req, res) => {
     }
 });
 
-
-// Call the function on page load
-document.addEventListener('DOMContentLoaded', loadLeaderboard);
 
 /*
 app.post('/leaderboard', async (req, res) => {
@@ -250,4 +247,5 @@ function calculateMMR(player1MMR, player2MMR, winner) {
     };
 }
 */
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
+app.use(express.static(__dirname));
