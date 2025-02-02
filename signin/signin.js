@@ -16,6 +16,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     createAccountBtn.addEventListener("click", function() {
-        window.location.href = "create.html"; // Redirect to the create account page
+        window.location.href = "/createacc/create.html"; // Adjusted path
     });
 });
