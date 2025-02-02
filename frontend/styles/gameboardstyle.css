@@ -1,0 +1,190 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('../../public/images/cards/backgroundSpaceArt.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction:column;
+    /* background-color: red; */
+    gap: 15px;
+
+}
+.enemySection {
+    display: flex;
+    justify-content: space-around; /* Elemanlar arasında eşit boşluk bırakır */
+    width: 100%; /* Kapsayıcının genişliğini tam olarak kullan */
+    max-width: 1920px; /* Maksimum genişlik belirle (isteğe bağlı) */
+    margin: 0 auto; /* Ortala (isteğe bağlı) */
+}
+.enemyDeckContainer {
+    flex: 1; /* 1 birim genişler */
+    height: 200px;
+    display: flex;
+    justify-content: center;
+}
+
+.enemyHandContainer {
+    flex: 2; /* 2 birim genişler */
+    height: 100%;
+    display: flex;
+    top: 0;
+    gap: 10px;
+    /* background-color: red; */
+}
+
+.enemyDiscardContainer {
+    display: flex;
+    justify-content: center;
+    flex: 1; /* 1 birim genişler */
+    height: 200px;
+}
+
+.shopSection {
+    display: flex;
+}
+
+.availableCardsContainer {
+    flex: 2;
+ display: flex;
+ align-items: center;
+ width: 1920px;
+ height: 467;
+ justify-content: space-evenly;
+
+}
+
+
+.shopDecksContainer {
+    flex: 1;
+    gap: 10%;
+    display: flex;
+}
+
+
+.playerSection {
+    display: flex;
+}
+.discardContainer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.playerHandContainer {
+    display: flex;
+    gap: 10px;
+}
+
+.playerDeckContainer {
+
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shopDecks {
+    cursor: pointer;
+}
+
+.availableCards {
+    cursor: pointer;
+}
+.playerCards {
+    cursor: pointer;
+    width: 170px;
+    height: 255px;
+    display: none; /* Varsayılan olarak gizli */
+    transition: transform 0.3s ease; /* Animasyon efekti için */
+}
+
+.playerCards:hover {
+    transform: translateY(-20px); /* Hover durumunda yukarı kalkma efekti */
+}
+
+.playerCards img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Hafif gölge efekti */
+}
+
+.playerDeck {
+    cursor: pointer;
+}
+
+.discardCards {
+    cursor: pointer;
+}
+
+.enemyDeck {
+    cursor: pointer;
+}
+
+.enemyCard {
+    cursor: pointer;
+}
+
+.enemyDiscard {
+    cursor: pointer;
+}
+
+.card-content {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.playerCards:hover .card-content,
+.availableCards:hover .card-content {
+    transform: translateY(-10px);
+    cursor: pointer;
+}
+
+.card-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+    border-radius: 10px;
+}
+
+.round-counter {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+.total-value-counter {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    border-radius: 10px;
+    z-index: 1000;
+}

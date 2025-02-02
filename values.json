@@ -1,0 +1,78 @@
+{
+    "players": [
+        {
+            "enemyDiscard": [
+                {
+                    "type": "number",
+                    "value": 7
+                },
+                {
+                    "type": "number",
+                    "value": 6
+                }
+            ]
+        },
+        {
+            "playerDiscard": [
+                {
+                    "type": "number",
+                    "value": 7
+                },
+                {
+                    "type": "sun",
+                    "value": 20
+                }
+            ],
+            "hand": [
+                {
+                    "type": "number",
+                    "value": 2
+                },
+                {
+                    "type": "number",
+                    "value": 4
+                },
+                {
+                    "type": "number",
+                    "value": 9
+                }
+            ],
+            "decklength": 5
+        }
+    ],
+    "turn": 3,
+    "shop": {
+        "powercardpile": [
+            {
+                "type": "blackhole",
+                "value": 25
+            },
+            {
+                "type": "sun",
+                "value": 20
+            }
+        ],
+        "powercardslot": {
+            "type": "sun",
+            "value": 20
+        },
+        "numbercardpile": [
+            {
+                "type": "number",
+                "value": 5
+            },
+            {
+                "type": "number",
+                "value": 7
+            }
+        ],
+        "numbercardslot": {
+            "type": "number",
+            "value": 7
+        }
+    },
+    "playedcard": {
+        "type": "blackhole",
+        "value": 20
+    }
+}
