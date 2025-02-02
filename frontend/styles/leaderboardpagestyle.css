@@ -89,8 +89,9 @@ body {
 }
 
 body {
-    background-image: url('Background\ Art\ 1.svg'); /* Path to your image */
+    background-image: url('../../public/images/Background Art 1.svg'); /* Path to your image */
     background-size: cover; /* Ensures the image covers the whole screen */
     background-position: center; /* Centers the image */
     background-repeat: no-repeat; /* Prevents tiling */
 }
+
